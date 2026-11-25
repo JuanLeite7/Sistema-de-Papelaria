@@ -196,19 +196,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\juanc\\.nuget\\packages\\": {}
+    "C:\\Users\\lanin\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\juanc\\Papelaria\\Papelaria.csproj",
+      "projectUniqueName": "C:\\Users\\lanin\\source\\repos\\JuanLeite7\\Sistema-de-Papelaria\\Papelaria\\Papelaria.csproj",
       "projectName": "Papelaria",
-      "projectPath": "C:\\Users\\juanc\\Papelaria\\Papelaria.csproj",
-      "packagesPath": "C:\\Users\\juanc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\juanc\\Papelaria\\obj\\",
+      "projectPath": "C:\\Users\\lanin\\source\\repos\\JuanLeite7\\Sistema-de-Papelaria\\Papelaria\\Papelaria.csproj",
+      "packagesPath": "C:\\Users\\lanin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\lanin\\source\\repos\\JuanLeite7\\Sistema-de-Papelaria\\Papelaria\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\juanc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\lanin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
