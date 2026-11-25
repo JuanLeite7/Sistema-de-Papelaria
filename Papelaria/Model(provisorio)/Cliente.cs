@@ -8,4 +8,5 @@ public class Cliente
     public string Telefone { get; set; } = "";
     public string Email { get; set; } = "";
     public string Endereco { get; set; } = "";
+    public override string ToString() => Nome;
 }

@@ -262,12 +262,12 @@ public class FrmProdutos : Form
     //   SalvarProduto(p)                  -> new ProdutoDAO().Salvar(p)  (insert ou update)
     //   ExcluirProduto(id)                -> new ProdutoDAO().Excluir(id)
     // =====================================================================
-    private static List<Categoria> ListarCategorias() => new();
+    private static List<Categoria> ListarCategorias() => FrmCategorias.ListarCategorias("");
 
     private static readonly List<Produto> bancoFake = new();
     private static int proximoId = 1;
 
-    private static List<Produto> ListarProdutos(string filtro, int categoriaId)
+    internal static List<Produto> ListarProdutos(string filtro, int categoriaId)
         => bancoFake
             .Where(p => (string.IsNullOrEmpty(filtro) || p.Nome.Contains(filtro, StringComparison.OrdinalIgnoreCase))
                      && (categoriaId == 0 || p.CategoriaId == categoriaId))

@@ -191,7 +191,7 @@ public class FrmCategorias : Form
     private static readonly List<Categoria> bancoFake = new();
     private static int proximoId = 1;
 
-    private static List<Categoria> ListarCategorias(string filtro)
+    internal static List<Categoria> ListarCategorias(string filtro)
         => bancoFake
             .Where(c => string.IsNullOrEmpty(filtro)
                      || c.Nome.Contains(filtro, StringComparison.OrdinalIgnoreCase))

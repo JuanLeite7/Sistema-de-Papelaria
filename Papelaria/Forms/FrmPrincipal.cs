@@ -45,14 +45,14 @@ public class FrmPrincipal : Form
         menu.Controls.Add(ItemMenu("Produtos", () => new FrmProdutos().ShowDialog()));
         menu.Controls.Add(ItemMenu("Fornecedores", () => new FrmFornecedores().ShowDialog()));
         menu.Controls.Add(ItemMenu("Categorias", () => new FrmCategorias().ShowDialog()));
-        menu.Controls.Add(ItemMenu("Usuários", () => EmConstrucao("Usuários")));
+        menu.Controls.Add(ItemMenu("Usuários", () => new FrmUsuarios().ShowDialog()));
 
         menu.Controls.Add(Secao("ESTOQUE"));
-        menu.Controls.Add(ItemMenu("Movimentação", () => EmConstrucao("Movimentação de Estoque")));
-        menu.Controls.Add(ItemMenu("Estoque baixo", () => EmConstrucao("Estoque Baixo")));
+        menu.Controls.Add(ItemMenu("Movimentação", () => new FrmMovimentacaoEstoque().ShowDialog()));
+        menu.Controls.Add(ItemMenu("Estoque baixo", () => new FrmEstoqueBaixo().ShowDialog()));
 
         menu.Controls.Add(Secao("VENDAS"));
-        menu.Controls.Add(ItemMenu("Nova venda", () => EmConstrucao("Nova Venda")));
+        menu.Controls.Add(ItemMenu("Nova venda", () => new FrmNovaVenda().ShowDialog()));
         menu.Controls.Add(ItemMenu("Histórico", () => EmConstrucao("Histórico de Vendas")));
         menu.Controls.Add(ItemMenu("Relatório", () => EmConstrucao("Relatório de Vendas")));
 
@@ -151,7 +151,7 @@ public class FrmPrincipal : Form
 
         var btnVenda = Tema.Botao("Nova venda", Tema.Sucesso, 0, 0, 180, 50);
         btnVenda.Margin = new Padding(0, 0, 15, 0);
-        btnVenda.Click += (_, _) => EmConstrucao("Nova Venda");
+        btnVenda.Click += (_, _) => new FrmNovaVenda().ShowDialog();
 
         var btnProduto = Tema.Botao("Produtos", Tema.Primaria, 0, 0, 180, 50);
         btnProduto.Margin = new Padding(0, 0, 15, 0);

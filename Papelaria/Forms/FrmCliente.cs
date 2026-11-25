@@ -224,7 +224,7 @@ public class FrmClientes : Form
     private static readonly List<Cliente> bancoFake = new();
     private static int proximoId = 1;
 
-    private static List<Cliente> ListarClientes(string filtro)
+    internal static List<Cliente> ListarClientes(string filtro)
         => bancoFake
             .Where(c => string.IsNullOrEmpty(filtro)
                      || c.Nome.Contains(filtro, StringComparison.OrdinalIgnoreCase)

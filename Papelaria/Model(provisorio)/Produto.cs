@@ -9,4 +9,5 @@ public class Produto
     public decimal Preco { get; set; }
     public int Estoque { get; set; }
     public int EstoqueMinimo { get; set; }
+    public override string ToString() => Nome;
 }
