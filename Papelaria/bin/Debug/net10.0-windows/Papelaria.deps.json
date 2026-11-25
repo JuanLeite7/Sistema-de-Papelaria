@@ -18,7 +18,8 @@
         "runtime": {
           "lib/net10.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
             "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.1526.53008"
+            "fileVersion": "10.0.1526.53008",
+            "localPath": "Microsoft.Extensions.DependencyInjection.Abstractions.dll"
           }
         }
       },
@@ -29,7 +30,8 @@
         "runtime": {
           "lib/net10.0/Microsoft.Extensions.Logging.Abstractions.dll": {
             "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.1526.53008"
+            "fileVersion": "10.0.1526.53008",
+            "localPath": "Microsoft.Extensions.Logging.Abstractions.dll"
           }
         }
       },
@@ -41,7 +43,8 @@
         "runtime": {
           "lib/net10.0/MySqlConnector.dll": {
             "assemblyVersion": "3.0.0.0",
-            "fileVersion": "3.0.0.0"
+            "fileVersion": "3.0.0.0",
+            "localPath": "MySqlConnector.dll"
           }
         }
       }

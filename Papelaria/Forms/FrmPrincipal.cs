@@ -53,7 +53,7 @@ public class FrmPrincipal : Form
 
         menu.Controls.Add(Secao("VENDAS"));
         menu.Controls.Add(ItemMenu("Nova venda", () => new FrmNovaVenda().ShowDialog()));
-        menu.Controls.Add(ItemMenu("Histórico", () => EmConstrucao("Histórico de Vendas")));
+        menu.Controls.Add(ItemMenu("Histórico", () => new FrmHistoricoVendas().ShowDialog()));
         menu.Controls.Add(ItemMenu("Relatório", () => EmConstrucao("Relatório de Vendas")));
 
         var logo = new Label
