@@ -58,7 +58,7 @@ public class FrmPrincipal : Form
 
         var logo = new Label
         {
-            Text = "Papelaria",
+            Text = "Papelaria Casa Bella",
             Dock = DockStyle.Top,
             Height = 70,
             Font = new Font("Segoe UI", 16F, FontStyle.Bold),
