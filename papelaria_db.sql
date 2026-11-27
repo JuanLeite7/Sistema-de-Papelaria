@@ -1,3 +1,5 @@
+CREATE DATABASE papelaria_db
+
 USE papelaria_db;
 
 CREATE TABLE Usuarios (
