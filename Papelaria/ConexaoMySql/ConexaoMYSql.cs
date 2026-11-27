@@ -7,7 +7,7 @@ namespace Papelaria.Conexao
     public class ConexaoMySQL
     {
         private static string connectionString =
-       "Server=localhost;Port=3306;Database=papelaria_db;User ID=root;Password=MuriloIgor14@$;";
+       "Server=localhost;Port=3306;Database=papelaria_db;User ID=root;Password= SUA SENHA;";
 
         public static MySqlConnection ObterConexao()
         {
