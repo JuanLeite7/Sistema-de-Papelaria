@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace Papelaria.Util;
+﻿namespace Papelaria.Util;
 
 /// <summary>Paleta, fontes e estilos centralizados. Mudou aqui, muda no sistema inteiro.</summary>
 public static class Tema

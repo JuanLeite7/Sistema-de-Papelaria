@@ -1,7 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using MySqlConnector;
+﻿using MySqlConnector;
 using Papelaria.Model;
 
 namespace Papelaria.DAO
