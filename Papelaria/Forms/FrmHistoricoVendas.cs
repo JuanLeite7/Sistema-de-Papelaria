@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using Papelaria.Model;
+﻿using Papelaria.Model;
 using Papelaria.Util;
 
 namespace Papelaria.Forms;

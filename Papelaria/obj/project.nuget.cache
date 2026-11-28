@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xSqnzddlTDA=",
+  "dgSpecHash": "zcdZtYRhgmk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\lanin\\source\\repos\\JuanLeite7\\Sistema-de-Papelaria\\Papelaria\\Papelaria.csproj",
+  "projectFilePath": "G:\\Documentos\\Ciencia da computacao\\Programação visual\\github\\Papelaria\\Papelaria.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lanin\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.15\\microsoft.extensions.dependencyinjection.abstractions.10.0.15.nupkg.sha512",
     "C:\\Users\\lanin\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.15\\microsoft.extensions.logging.abstractions.10.0.15.nupkg.sha512",

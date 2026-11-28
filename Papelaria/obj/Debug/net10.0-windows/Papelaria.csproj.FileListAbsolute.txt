@@ -18,3 +18,15 @@ C:\Users\lanin\source\repos\JuanLeite7\Sistema-de-Papelaria\Papelaria\obj\Debug\
 C:\Users\lanin\source\repos\JuanLeite7\Sistema-de-Papelaria\Papelaria\obj\Debug\net10.0-windows\Papelaria.pdb
 C:\Users\lanin\source\repos\JuanLeite7\Sistema-de-Papelaria\Papelaria\obj\Debug\net10.0-windows\Papelaria.genruntimeconfig.cache
 C:\Users\lanin\source\repos\JuanLeite7\Sistema-de-Papelaria\Papelaria\obj\Debug\net10.0-windows\ref\Papelaria.dll
+G:\Documentos\Ciencia da computacao\Programação visual\github\Papelaria\obj\Debug\net10.0-windows\Papelaria.csproj.AssemblyReference.cache
+G:\Documentos\Ciencia da computacao\Programação visual\github\Papelaria\obj\Debug\net10.0-windows\Papelaria.Forms.FrmCategorias.resources
+G:\Documentos\Ciencia da computacao\Programação visual\github\Papelaria\obj\Debug\net10.0-windows\Papelaria.Forms.FrmPrincipal.resources
+G:\Documentos\Ciencia da computacao\Programação visual\github\Papelaria\obj\Debug\net10.0-windows\Papelaria.csproj.GenerateResource.cache
+G:\Documentos\Ciencia da computacao\Programação visual\github\Papelaria\obj\Debug\net10.0-windows\Papelaria.GeneratedMSBuildEditorConfig.editorconfig
+G:\Documentos\Ciencia da computacao\Programação visual\github\Papelaria\obj\Debug\net10.0-windows\Papelaria.AssemblyInfoInputs.cache
+G:\Documentos\Ciencia da computacao\Programação visual\github\Papelaria\obj\Debug\net10.0-windows\Papelaria.AssemblyInfo.cs
+G:\Documentos\Ciencia da computacao\Programação visual\github\Papelaria\obj\Debug\net10.0-windows\Papelaria.csproj.CoreCompileInputs.cache
+G:\Documentos\Ciencia da computacao\Programação visual\github\Papelaria\obj\Debug\net10.0-windows\Papelaria.sourcelink.json
+G:\Documentos\Ciencia da computacao\Programação visual\github\Papelaria\obj\Debug\net10.0-windows\Papelaria.dll
+G:\Documentos\Ciencia da computacao\Programação visual\github\Papelaria\obj\Debug\net10.0-windows\refint\Papelaria.dll
+G:\Documentos\Ciencia da computacao\Programação visual\github\Papelaria\obj\Debug\net10.0-windows\Papelaria.pdb

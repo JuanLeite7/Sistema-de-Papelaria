@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lanin\\source\\repos\\JuanLeite7\\Sistema-de-Papelaria\\Papelaria\\Papelaria.csproj": {}
+    "G:\\Documentos\\Ciencia da computacao\\Programação visual\\github\\Papelaria\\Papelaria.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lanin\\source\\repos\\JuanLeite7\\Sistema-de-Papelaria\\Papelaria\\Papelaria.csproj": {
+    "G:\\Documentos\\Ciencia da computacao\\Programação visual\\github\\Papelaria\\Papelaria.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lanin\\source\\repos\\JuanLeite7\\Sistema-de-Papelaria\\Papelaria\\Papelaria.csproj",
+        "projectUniqueName": "G:\\Documentos\\Ciencia da computacao\\Programação visual\\github\\Papelaria\\Papelaria.csproj",
         "projectName": "Papelaria",
-        "projectPath": "C:\\Users\\lanin\\source\\repos\\JuanLeite7\\Sistema-de-Papelaria\\Papelaria\\Papelaria.csproj",
+        "projectPath": "G:\\Documentos\\Ciencia da computacao\\Programação visual\\github\\Papelaria\\Papelaria.csproj",
         "packagesPath": "C:\\Users\\lanin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lanin\\source\\repos\\JuanLeite7\\Sistema-de-Papelaria\\Papelaria\\obj\\",
+        "outputPath": "G:\\Documentos\\Ciencia da computacao\\Programação visual\\github\\Papelaria\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
