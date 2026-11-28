@@ -1,4 +1,6 @@
-﻿using Papelaria.Util;
+using Papelaria.DAO;
+using Papelaria.Model;
+using Papelaria.Util;
 
 namespace Papelaria.Forms;
 
@@ -68,27 +70,37 @@ public class FrmLogin : Form
         btnEntrar.Click += BtnEntrar_Click;
     }
 
-    private void BtnEntrar_Click(object? sender, EventArgs e)
+  private void BtnEntrar_Click(object? sender, EventArgs e)
+{
+    if (string.IsNullOrWhiteSpace(txtUsuario.Text) || string.IsNullOrWhiteSpace(txtSenha.Text))
     {
-        // Validação de campos obrigatórios
-        if (string.IsNullOrWhiteSpace(txtUsuario.Text) || string.IsNullOrWhiteSpace(txtSenha.Text))
-        {
-            MessageBox.Show("Informe usuário e senha.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
-        }
-
-        // TODO: trocar pelo DAO do colega, ex: new UsuarioDAO().Autenticar(usuario, senha)
-        bool ok = txtUsuario.Text == "admin" && txtSenha.Text == "123";
-
-        if (!ok)
-        {
-            MessageBox.Show("Usuário ou senha inválidos.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
-        }
-
-        Hide();
-        var principal = new FrmPrincipal(txtUsuario.Text);
-        principal.FormClosed += (_, _) => Close();
-        principal.Show();
+        MessageBox.Show("Informe usuário e senha.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        return;
     }
+
+    Usuario? usuario;
+
+    try
+    {
+        var dao = new UsuarioDAO(Conexao.ConnectionString);
+        usuario = dao.Autenticar(txtUsuario.Text.Trim(), txtSenha.Text);
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show("Erro ao conectar com o banco:\n" + ex.Message,
+            "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        return;
+    }
+
+    if (usuario == null)
+    {
+        MessageBox.Show("Usuário ou senha inválidos.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        return;
+    }
+
+    Hide();
+    var principal = new FrmPrincipal(usuario.Nome); // ou passe o objeto usuario inteiro
+    principal.FormClosed += (_, _) => Close();
+    principal.Show();
+}
 }
