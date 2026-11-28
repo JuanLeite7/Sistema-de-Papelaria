@@ -1,6 +1,7 @@
 using Papelaria.DAO;
 using Papelaria.Model;
 using Papelaria.Util;
+using Papelaria.Conexao;
 
 namespace Papelaria.Forms;
 
@@ -82,8 +83,8 @@ public class FrmLogin : Form
 
     try
     {
-        var dao = new UsuarioDAO(Conexao.ConnectionString);
-        usuario = dao.Autenticar(txtUsuario.Text.Trim(), txtSenha.Text);
+            var dao = new UsuarioDAO(ConexaoMySQL.ConnectionString);
+            usuario = dao.Autenticar(txtUsuario.Text.Trim(), txtSenha.Text);
     }
     catch (Exception ex)
     {

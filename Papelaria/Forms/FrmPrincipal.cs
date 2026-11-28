@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Papelaria.Util;
+using System.Drawing.Drawing2D;
 
 namespace Papelaria.Forms;
 
