@@ -5,8 +5,11 @@ namespace Papelaria.Forms;
 
 public class FrmPrincipal : Form
 {
+    private enum Icone { Venda, Estoque, Cadastro }
+
     private readonly string usuarioLogado;
     private readonly Panel conteudo = new() { Dock = DockStyle.Fill, BackColor = Tema.Fundo };
+    private readonly List<Button> abas = new();
 
     public FrmPrincipal(string usuario)
     {
@@ -18,102 +21,187 @@ public class FrmPrincipal : Form
         Font = Tema.Fonte;
         BackColor = Tema.Fundo;
 
-        MontarDashboard();   // Fill primeiro
-        MontarSidebar();     // Left depois
+        Controls.Add(conteudo);   // Fill primeiro
+        MontarMenuTopo();         // Top depois
+
+        MostrarDashboard();       // tela inicial (clique no nome da loja volta pra cá)
     }
 
-    // ---------- MENU LATERAL ----------
-    private void MontarSidebar()
+    // ---------- MENU NO TOPO ----------
+    private void MontarMenuTopo()
     {
-        var sidebar = new Panel { Dock = DockStyle.Left, Width = 240, BackColor = Tema.Sidebar };
+        var topo = new Panel { Dock = DockStyle.Top, Height = 64, BackColor = Tema.Sidebar };
 
         var menu = new FlowLayoutPanel
         {
             Dock = DockStyle.Fill,
-            FlowDirection = FlowDirection.TopDown,
+            FlowDirection = FlowDirection.LeftToRight,
             WrapContents = false,
-            BackColor = Tema.Sidebar
+            BackColor = Tema.Sidebar,
+            Padding = new Padding(10, 0, 0, 0)
         };
 
-        var inicio = ItemMenu("Dashboard", () => { });
-        inicio.BackColor = Tema.SidebarHover; // marca como tela ativa
-        menu.Controls.Add(inicio);
-
-        menu.Controls.Add(Secao("CADASTROS"));
-        menu.Controls.Add(ItemMenu("Clientes", () => new FrmClientes().ShowDialog()));
-        menu.Controls.Add(ItemMenu("Produtos", () => new FrmProdutos().ShowDialog()));
-        menu.Controls.Add(ItemMenu("Fornecedores", () => new FrmFornecedores().ShowDialog()));
-        menu.Controls.Add(ItemMenu("Categorias", () => new FrmCategorias().ShowDialog()));
-        menu.Controls.Add(ItemMenu("Usuários", () => new FrmUsuarios().ShowDialog()));
-
-        menu.Controls.Add(Secao("ESTOQUE"));
-        menu.Controls.Add(ItemMenu("Movimentação", () => new FrmMovimentacaoEstoque().ShowDialog()));
-        menu.Controls.Add(ItemMenu("Estoque baixo", () => new FrmEstoqueBaixo().ShowDialog()));
-
-        menu.Controls.Add(Secao("VENDAS"));
-        menu.Controls.Add(ItemMenu("Nova venda", () => new FrmNovaVenda().ShowDialog()));
-        menu.Controls.Add(ItemMenu("Histórico", () => new FrmHistoricoVendas().ShowDialog()));
-        menu.Controls.Add(ItemMenu("Relatório", () => EmConstrucao("Relatório de Vendas")));
+        // Ordem: Venda, Estoque, Cadastro
+        menu.Controls.Add(Aba("Venda", Icone.Venda, MostrarVenda));
+        menu.Controls.Add(Aba("Estoque", Icone.Estoque, MostrarEstoque));
+        menu.Controls.Add(Aba("Cadastro", Icone.Cadastro, MostrarCadastro));
 
         var logo = new Label
         {
             Text = "Papelaria Casa Bella",
-            Dock = DockStyle.Top,
-            Height = 70,
+            Dock = DockStyle.Left,
+            Width = 290,
             Font = new Font("Segoe UI", 16F, FontStyle.Bold),
             ForeColor = Color.White,
             TextAlign = ContentAlignment.MiddleLeft,
-            Padding = new Padding(20, 0, 0, 0)
+            Padding = new Padding(20, 0, 0, 0),
+            Cursor = Cursors.Hand
         };
+        logo.Click += (_, _) => MostrarDashboard();
 
-        var btnSair = ItemMenu("Sair", () => Close());
-        btnSair.Dock = DockStyle.Bottom;
-
-        // Ordem importa no Dock: Fill primeiro, depois Top e Bottom
-        sidebar.Controls.Add(menu);
-        sidebar.Controls.Add(logo);
-        sidebar.Controls.Add(btnSair);
-        Controls.Add(sidebar);
-    }
-
-    private static Button ItemMenu(string texto, Action acao)
-    {
-        var b = new Button
+        var btnSair = new Button
         {
-            Text = "   " + texto,
-            Width = 240,
-            Height = 38,
-            Margin = new Padding(0),
+            Text = "Sair",
+            Dock = DockStyle.Right,
+            Width = 100,
             FlatStyle = FlatStyle.Flat,
-            TextAlign = ContentAlignment.MiddleLeft,
             ForeColor = Color.White,
             BackColor = Tema.Sidebar,
             Font = Tema.Fonte,
             Cursor = Cursors.Hand,
             UseVisualStyleBackColor = false
         };
+        btnSair.FlatAppearance.BorderSize = 0;
+        btnSair.FlatAppearance.MouseOverBackColor = Tema.SidebarHover;
+        btnSair.Click += (_, _) => Close();
+
+        // Ordem importa no Dock: Fill primeiro, depois Left e Right
+        topo.Controls.Add(menu);
+        topo.Controls.Add(logo);
+        topo.Controls.Add(btnSair);
+        Controls.Add(topo);
+    }
+
+    private Button Aba(string texto, Icone icone, Action abrir)
+    {
+        var b = new Button
+        {
+            Text = texto,
+            Image = CriarIcone(icone, Color.White, 26),
+            TextImageRelation = TextImageRelation.ImageBeforeText,
+            ImageAlign = ContentAlignment.MiddleCenter,
+            TextAlign = ContentAlignment.MiddleCenter,
+            Width = 160,
+            Height = 64,
+            Margin = new Padding(0),
+            FlatStyle = FlatStyle.Flat,
+            ForeColor = Color.White,
+            BackColor = Tema.Sidebar,
+            Font = new Font("Segoe UI", 11F, FontStyle.Bold),
+            Cursor = Cursors.Hand,
+            UseVisualStyleBackColor = false
+        };
         b.FlatAppearance.BorderSize = 0;
         b.FlatAppearance.MouseOverBackColor = Tema.SidebarHover;
-        b.Click += (_, _) => acao();
+        b.Click += (_, _) =>
+        {
+            MarcarAba(b);
+            abrir();
+        };
+        abas.Add(b);
         return b;
     }
 
-    private static Label Secao(string texto) => new()
+    private void MarcarAba(Button? ativa)
     {
-        Text = texto,
-        Width = 240,
-        Height = 30,
-        Margin = new Padding(0),
-        TextAlign = ContentAlignment.BottomLeft,
-        Padding = new Padding(20, 0, 0, 4),
-        ForeColor = Color.FromArgb(165, 180, 252),
-        Font = new Font("Segoe UI", 8F, FontStyle.Bold)
-    };
+        foreach (var a in abas)
+            a.BackColor = a == ativa ? Tema.SidebarHover : Tema.Sidebar;
+    }
 
-    // ---------- DASHBOARD ----------
-    private void MontarDashboard()
+    // ---------- PÁGINAS ----------
+    private void Navegar(Panel pagina)
     {
-        conteudo.Controls.Add(new Label
+        conteudo.SuspendLayout();
+        foreach (Control c in conteudo.Controls) c.Dispose();
+        conteudo.Controls.Clear();
+        pagina.Dock = DockStyle.Fill;
+        conteudo.Controls.Add(pagina);
+        conteudo.ResumeLayout();
+    }
+
+    private void MostrarVenda() => Navegar(MontarPagina(
+        Icone.Venda, "Venda", "Registre vendas e acompanhe o histórico.",
+        ("Nova venda", Tema.Sucesso, () => new FrmNovaVenda().ShowDialog()),
+        ("Histórico", Tema.Primaria, () => new FrmHistoricoVendas().ShowDialog()),
+        ("Relatório", Tema.Primaria, () => EmConstrucao("Relatório de Vendas"))));
+
+    private void MostrarEstoque() => Navegar(MontarPagina(
+        Icone.Estoque, "Estoque", "Controle entradas, saídas e produtos acabando.",
+        ("Movimentação", Tema.Primaria, () => new FrmMovimentacaoEstoque().ShowDialog()),
+        ("Estoque baixo", Tema.Perigo, () => new FrmEstoqueBaixo().ShowDialog())));
+
+    private void MostrarCadastro() => Navegar(MontarPagina(
+        Icone.Cadastro, "Cadastro", "Gerencie clientes, produtos e demais registros.",
+        ("Clientes", Tema.Primaria, () => new FrmClientes().ShowDialog()),
+        ("Produtos", Tema.Primaria, () => new FrmProdutos().ShowDialog()),
+        ("Fornecedores", Tema.Primaria, () => new FrmFornecedores().ShowDialog()),
+        ("Categorias", Tema.Primaria, () => new FrmCategorias().ShowDialog()),
+        ("Usuários", Tema.Primaria, () => new FrmUsuarios().ShowDialog())));
+
+    private static Panel MontarPagina(Icone icone, string titulo, string subtitulo,
+        params (string Texto, Color Cor, Action Acao)[] itens)
+    {
+        var pagina = new Panel { BackColor = Tema.Fundo };
+
+        // Título com ícone de contorno preto
+        pagina.Controls.Add(new PictureBox
+        {
+            Image = CriarIcone(icone, Color.Black, 44),
+            SizeMode = PictureBoxSizeMode.AutoSize,
+            Location = new Point(30, 22),
+            BackColor = Color.Transparent
+        });
+        pagina.Controls.Add(new Label
+        {
+            Text = titulo,
+            Font = Tema.FonteTitulo,
+            ForeColor = Tema.Texto,
+            Location = new Point(86, 20),
+            AutoSize = true
+        });
+        pagina.Controls.Add(new Label
+        {
+            Text = subtitulo,
+            ForeColor = Tema.TextoSuave,
+            Location = new Point(88, 62),
+            AutoSize = true
+        });
+
+        var cards = new FlowLayoutPanel
+        {
+            Location = new Point(30, 110),
+            Size = new Size(1040, 400),
+            BackColor = Color.Transparent
+        };
+        foreach (var (texto, cor, acao) in itens)
+        {
+            var b = Tema.Botao(texto, cor, 0, 0, 220, 90);
+            b.Margin = new Padding(0, 0, 20, 20);
+            b.Click += (_, _) => acao();
+            cards.Controls.Add(b);
+        }
+        pagina.Controls.Add(cards);
+        return pagina;
+    }
+
+    // ---------- DASHBOARD (tela inicial) ----------
+    private void MostrarDashboard()
+    {
+        MarcarAba(null);
+
+        var pagina = new Panel { BackColor = Tema.Fundo };
+
+        pagina.Controls.Add(new Label
         {
             Text = $"Olá, {usuarioLogado}!",
             Font = Tema.FonteTitulo,
@@ -121,7 +209,7 @@ public class FrmPrincipal : Form
             Location = new Point(30, 25),
             AutoSize = true
         });
-        conteudo.Controls.Add(new Label
+        pagina.Controls.Add(new Label
         {
             Text = DateTime.Now.ToString("dddd, dd 'de' MMMM 'de' yyyy", new CultureInfo("pt-BR")),
             ForeColor = Tema.TextoSuave,
@@ -135,9 +223,9 @@ public class FrmPrincipal : Form
         cards.Controls.Add(Tema.CartaoIndicador("Estoque baixo", "0", Tema.Perigo));
         cards.Controls.Add(Tema.CartaoIndicador("Vendas hoje", "0", Tema.Sucesso));
         cards.Controls.Add(Tema.CartaoIndicador("Faturamento hoje", "R$ 0,00", Tema.Alerta));
-        conteudo.Controls.Add(cards);
+        pagina.Controls.Add(cards);
 
-        conteudo.Controls.Add(new Label
+        pagina.Controls.Add(new Label
         {
             Text = "Atalhos rápidos",
             Font = new Font("Segoe UI", 13F, FontStyle.Bold),
@@ -161,9 +249,61 @@ public class FrmPrincipal : Form
         btnCliente.Click += (_, _) => new FrmClientes().ShowDialog();
 
         atalhos.Controls.AddRange(new Control[] { btnVenda, btnProduto, btnCliente });
-        conteudo.Controls.Add(atalhos);
+        pagina.Controls.Add(atalhos);
 
-        Controls.Add(conteudo);
+        Navegar(pagina);
+    }
+
+    // ---------- ÍCONES DE CONTORNO (desenhados em código, sem arquivos externos) ----------
+    private static Bitmap CriarIcone(Icone tipo, Color cor, int tamanho)
+    {
+        var bmp = new Bitmap(tamanho, tamanho);
+        using var g = Graphics.FromImage(bmp);
+        g.SmoothingMode = SmoothingMode.AntiAlias;
+        g.Clear(Color.Transparent);
+        g.ScaleTransform(tamanho / 24f, tamanho / 24f); // desenha numa grade de 24x24
+
+        using var pen = new Pen(cor, 1.6f)
+        {
+            LineJoin = LineJoin.Round,
+            StartCap = LineCap.Round,
+            EndCap = LineCap.Round
+        };
+
+        static PointF[] P(params float[] v)
+        {
+            var pts = new PointF[v.Length / 2];
+            for (int i = 0; i < pts.Length; i++) pts[i] = new PointF(v[i * 2], v[i * 2 + 1]);
+            return pts;
+        }
+
+        switch (tipo)
+        {
+            case Icone.Cadastro: // folha de papel com canto dobrado e linhas de texto
+                g.DrawPolygon(pen, P(6, 3, 14, 3, 19, 8, 19, 21, 6, 21));
+                g.DrawLines(pen, P(14, 3, 14, 8, 19, 8));
+                g.DrawLine(pen, 9, 13, 16, 13);
+                g.DrawLine(pen, 9, 17, 16, 17);
+                break;
+
+            case Icone.Estoque: // caixa de papelão
+                g.DrawPolygon(pen, P(12, 3, 21, 7.5f, 21, 16.5f, 12, 21, 3, 16.5f, 3, 7.5f));
+                g.DrawLines(pen, P(3, 7.5f, 12, 12, 21, 7.5f));
+                g.DrawLine(pen, 12, 12, 12, 21);
+                g.DrawLine(pen, 7.5f, 5.25f, 16.5f, 9.75f); // fita da caixa
+                break;
+
+            case Icone.Venda: // caixa registradora
+                g.DrawRectangle(pen, 8, 3, 8, 5);                  // visor
+                g.DrawLine(pen, 12, 8, 12, 10);                    // haste
+                g.DrawPolygon(pen, P(6, 10, 18, 10, 21, 17, 3, 17)); // teclado
+                g.DrawRectangle(pen, 3, 17, 18, 4);                // gaveta
+                g.DrawEllipse(pen, 7.6f, 12.8f, 0.8f, 0.8f);       // teclas
+                g.DrawEllipse(pen, 11.6f, 12.8f, 0.8f, 0.8f);
+                g.DrawEllipse(pen, 15.6f, 12.8f, 0.8f, 0.8f);
+                break;
+        }
+        return bmp;
     }
 
     // Provisório: enquanto a tela não existe. Depois trocar por: new FrmXxx().ShowDialog();
