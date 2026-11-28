@@ -121,7 +121,7 @@ CREATE TABLE Promocoes (
 );
 
 INSERT INTO Usuarios (nome, email, senha_hash, tipo) VALUES
-('Administrador', 'admin@papelaria.com', 'hash_admin', 'ADMIN'),
+('Administrador', 'admin@papelaria.com', 'PBKDF2$210000$34qqIrojeEfvHx1bu5vhmA==$g30NvnBu4+L1/+KwjMc95CtKOFwe92epEXgaFn31TQk=', 'ADMIN'),
 ('Guilherme Cosme', 'guilherme.cosme@papelaria.com', 'hash_guilherme_cosme', 'VENDEDOR'),
 ('Patricia Kaiane', 'patricia.kaiane@papelaria.com', 'hash_patricia_kaiane', 'ESTOQUISTA'),
 ('Guilherme Francisquini', 'guilherme.francisquini@papelaria.com', 'hash_guilherme_francisquini', 'VENDEDOR');
